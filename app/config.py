@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = 60 * 24 * 7
 
-    cors_origins: str = "http://localhost:5173,http://localhost:3000,http://192.168.1.67:3000"
+    cors_origins: str = "http://localhost:5173,http://localhost:3000,http://192.168.1.67:3000,https://restova-front.vercel.app"
     frontend_url: str = "http://localhost:5173"
     public_base_url: str = "http://localhost:8000"
 
