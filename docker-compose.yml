@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 3321
+      POSTGRES_DB: restova
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 10
+
+  api:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://postgres:3321@db:5432/restova
+    depends_on:
+      db: { condition: service_healthy }
+    ports: ["8000:8000"]
+
+volumes:
+  pgdata:
